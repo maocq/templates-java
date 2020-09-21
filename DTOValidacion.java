@@ -1,11 +1,10 @@
 #if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};#end
 #parse("File Header.java")
 
-import infraestructura.acl.dto.servicios.DTOValidacion;
+import com.qiip.base.infraestructura.acl.dto.DTOValidacion;
 import io.vavr.Value;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
-import io.vavr.control.Option;
 import io.vavr.control.Validation;
 import org.apache.commons.lang3.StringUtils;
 

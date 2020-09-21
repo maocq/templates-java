@@ -7,20 +7,21 @@ import com.qiip.base.dominio.comandos.Consecuencia;
 import com.qiip.base.dominio.respuestas.Error;
 import com.qiip.base.dominio.respuestas.ErrorDominio;
 import com.qiip.base.infraestructura.acl.DTO;
-import controladores.Transformador;
 import io.vavr.collection.List;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import play.Logger;
 import play.libs.Json;
 
-public class ${NAME} implements Comando, Transformador<${DTO}> {
+import static com.qiip.base.controladores.Transformador.transformar;
+
+public class ${NAME} implements Comando {
     private final Logger.ALogger logger = Logger.of(this.getClass());
 
     @Override
     public Future<Consecuencia> ejecutar(JsonNode json) {
 
-        return transformarJson(json, ${DTO}.class).fold(
+        return transformar(json, ${DTO}.class).fold(
           error -> Future.successful(obtenerConcecuenciaFallida(new ErrorDominio("Json invalido", error), json)),
           dto -> execute(dto, json));
     }
@@ -31,12 +32,12 @@ public class ${NAME} implements Comando, Transformador<${DTO}> {
     }
 
     private Consecuencia obtenerConcecuenciaFallida(Error error, JsonNode json) {
-        logger.error("Error Algo: " + Json.toJson(error));
+        logger.error("Error ${NAME}: " + Json.toJson(error));
         return new Consecuencia(Either.left(error), List.empty());
     }
 
     private Consecuencia obtenerConcecuenciaExitosa(DTO dto) {
-        logger.info("Algo exitoso: ");
+        logger.info("${NAME} exitoso: ");
         return new Consecuencia(Either.right(dto), List.empty());
     }
 }
