@@ -8,44 +8,29 @@ import io.vavr.control.Either;
 import io.vavr.control.Validation;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.qiip.base.controladores.Validador.*;
+
 public class ${NAME}DTO implements DTOValidacion<${NAME}DTO> {
 
     private Integer idUsuario;
     private String estado;
+    private Integer edad;
     
     public ${NAME}DTO() {
         //Json constructor
     }
 
-    public ${NAME}DTO(Integer idUsuario, String estado) {
+    public ${NAME}DTO(Integer idUsuario, String estado, Integer edad) {
         this.idUsuario = idUsuario;
         this.estado = estado;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public String getEstado() {
-        return estado;
+        this.edad = edad;
     }
  
     public Either<List<String>, ${NAME}DTO> validar() {
         return Validation.combine(
-          validarIdUsuario(),
-          validarEstado()
+          validarNoNull(idUsuario, "${NAME}.idUsuario"),
+          validarTexto(estado, "${NAME}.estado"),
+          validarCondicion(edad, n -> n > 18, "")
         ).ap(${NAME}DTO::new).toEither().mapLeft(Value::toList);
-    }
-
-    private Validation<String, Integer> validarIdUsuario() {
-        return idUsuario == null
-          ? Validation.invalid("${NAME}.idUsuario")
-          : Validation.valid(idUsuario);
-    }
-
-    private Validation<String, String> validarEstado() {
-        return StringUtils.isBlank(estado)
-          ? Validation.invalid("${NAME}.estado")
-          : Validation.valid(estado);
     }
 }
