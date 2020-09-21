@@ -20,6 +20,7 @@ public class ${NAME} implements Comando {
 
     @Override
     public Future<Consecuencia> ejecutar(JsonNode json) {
+        logger.info("Inicio ${NAME} " + json);
 
         return transformar(json, ${DTO}.class).fold(
           error -> Future.successful(obtenerConcecuenciaFallida(new ErrorDominio("Json invalido", error), json)),
