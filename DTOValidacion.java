@@ -6,7 +6,6 @@ import io.vavr.Value;
 import io.vavr.collection.List;
 import io.vavr.control.Either;
 import io.vavr.control.Validation;
-import org.apache.commons.lang3.StringUtils;
 
 import static com.qiip.base.controladores.Validador.*;
 
