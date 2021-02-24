@@ -1,5 +1,5 @@
 # --- !Ups
-CREATE TABLE ${NAME}
+CREATE TABLE nombre
 (
 id                          SERIAL,
 --uuid                        UUID PRIMARY KEY,
@@ -16,14 +16,14 @@ activo                      BOOLEAN NOT NULL,
 fecha_nacimiento            TIMESTAMP,
 fecha_creacion              TIMESTAMP WITH TIME ZONE NOT NULL,
 fecha_actualizacion         TIMESTAMP WITH TIME ZONE NOT NULL,
-CONSTRAINT ${NAME}_pk PRIMARY KEY (id)
+CONSTRAINT nombre_pk PRIMARY KEY (id)
 --CONSTRAINT <campo>_unique UNIQUE (<campo1>, <campo2>),
 --CONSTRAINT <campo>_fk FOREIGN KEY (<campo>) REFERENCES <otra_tabla> (<campo_otra_tabla>)
 );
 
-COMMENT ON TABLE ${NAME} IS 'Tabla con la información de ...';
-COMMENT ON COLUMN ${NAME}.id IS 'xxx';
-COMMENT ON COLUMN ${NAME}.nombre IS 'xxx';
+COMMENT ON TABLE nombre IS 'Tabla con la información de ...';
+COMMENT ON COLUMN nombre.id IS 'xxx';
+COMMENT ON COLUMN nombre.nombre IS 'xxx';
 
 # --- !Downs
-DROP TABLE ${NAME};
+DROP TABLE nombre;
